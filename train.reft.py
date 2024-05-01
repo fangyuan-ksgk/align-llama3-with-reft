@@ -1,4 +1,3 @@
-HF_TOKEN = "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"
 from huggingface_hub import login
 login(
   token=HF_TOKEN, # ADD YOUR TOKEN HERE
