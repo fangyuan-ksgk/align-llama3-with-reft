@@ -4,6 +4,7 @@ login(
   add_to_git_credential=True
 )
 
+from patch import parse_positions, get_intervention_locations, make_multiple_position_supervised_data_module
 import torch
 from tqdm import tqdm as tqdm
 import numpy as np
@@ -83,7 +84,7 @@ reft_model.print_trainable_parameters()
 # position info about the interventions
 share_weights = True # whether the prefix and suffix interventions sharing weights.
 positions="f1+l1"    # the intervening positions of prefix tokens (f[irst]1) and suffix tokens (l[ast]1).
-first_n, last_n = pyreft.parse_positions(positions)
+first_n, last_n = parse_positions(positions)
 
 
 ###############
@@ -104,7 +105,7 @@ answer_list = [
             [{"role": "assistant", "content": data['completion']}], tokenize=False,
         )[len(tokenizer.bos_token):] for data in dataset]
 
-data_module = pyreft.make_multiple_position_supervised_data_module(
+data_module = make_multiple_position_supervised_data_module(
     tokenizer, model, query_list, answer_list, 
     positions=positions, num_interventions=len(reft_config.representations), share_weights=share_weights, nonstop=False)
 
