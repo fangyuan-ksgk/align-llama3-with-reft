@@ -46,10 +46,11 @@ def prepare_sale_dataset():
 
 
 ########################
-# Load Llama3-8B model #
+# Load Yi 1.5 6B model #
 ########################
 
-model_name_or_path = "meta-llama/Meta-Llama-3-8B-Instruct"
+# model_name_or_path = "meta-llama/Meta-Llama-3-8B-Instruct"
+model_name_or_path = "01-ai/Yi-1.5-6B"
 model = transformers.AutoModelForCausalLM.from_pretrained(
     model_name_or_path, torch_dtype=torch.bfloat16, device_map=device)
 
